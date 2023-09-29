@@ -118,7 +118,7 @@ class ReceiptController extends Controller
 
             $entry = [];
 
-            if($request->mode=='1'){
+            if($request->mode=='5'){
             $entry[] = new Entry([
                 'account_id' => '5',
                 'transaction_id' => $count,

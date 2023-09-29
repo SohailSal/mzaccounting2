@@ -60,8 +60,8 @@
           <div class="form-group float-left">
               <label for="mode">Bank Account:</label>
                 <select class="form-control" id="mode" name="mode">
-    		    	<option value='1'>Bank Al-Habib</option>
-    		    	<option value='2'>Faysal Bank</option>
+    		    	<option value='5'>Bank Al-Habib</option>
+    		    	<option value='590'>Faysal Bank</option>
                 </select>
           </div>
 </div>
