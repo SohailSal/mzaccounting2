@@ -46,6 +46,13 @@
             </div>
 
             <div class="row">
+                <div class="form-group float-left">
+                    <label for="cheque">Cheque #:</label>
+                    <input type="text" class="form-control" id="cheque" name="cheque" value="{{$payment->cheque}}"/>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>

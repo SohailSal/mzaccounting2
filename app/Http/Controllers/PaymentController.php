@@ -84,6 +84,7 @@ class PaymentController extends Controller
             $payment->date_of_payment =  $request->get('date_of_payment');
             $payment->account_id = $request->get('account_id');
             $payment->mode = $request->get('mode');
+            $payment->cheque = $request->get('cheque');
             $payment->save();
             $transaction->date_of_transaction = $request->get('date_of_payment');
             $transaction->save();
