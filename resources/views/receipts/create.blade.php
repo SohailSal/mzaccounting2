@@ -168,8 +168,8 @@ $(document).ready(function() {
         $('#gross').val('0');
         }
         else{
-        net = Math.round(amount/0.89);
-        itax = Math.round(net*0.11);
+        net = Math.round(amount/0.85);
+        itax = Math.round(net*0.15);
         gross = amount + itax + stax;
         $('#itax').val(itax);
         $('#gross').val(gross);
