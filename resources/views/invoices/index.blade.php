@@ -7,6 +7,12 @@
       {{ session()->get('success') }}
     </div>
   @endif
+
+    <?php
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
+    ?>
+
     <h1 class="display-5">Invoices</h1>
     <div>
     <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
@@ -29,7 +35,8 @@
           <td>Ref</td>
           <td>Date of Invoice</td>
           <td>Account ID</td>
-          <td colspan = 4 style="text-align:center;">Actions</td>
+          <td>Total</td>
+          <td colspan = 3 style="text-align:center;">Actions</td>
         </tr>
     </thead>
     <tbody>
@@ -38,11 +45,18 @@
             <td>{{$invoice->ref}}</td>
             <td>{{$invoice->date_of_invoice}}</td>
             <td>{{$invoice->account->head_of_account}}</td>
+
+              @foreach($invoice->invoiceentries as $entry)
+                @if($loop->last)
+                <td align="right">{{ $fmt->formatCurrency($entry->amount,'Rs.') }}</td>
+                @endif
+              @endforeach
+
             <td>
                 <a href="{{ route('invoices.show',$invoice->id)}}" class="btn btn-info">Show</a>
           	</td>
             <td>
-                <a href="{{action('InvoiceController@downloadPDF', $invoice->id)}}">Generate Invoice PDF</a>
+                <a href="{{action('InvoiceController@downloadPDF', $invoice->id)}}">Generate PDF</a>
             </td>
             <td>
                 <form action="{{ route('invoices.destroy', $invoice->id)}}" method="post">
