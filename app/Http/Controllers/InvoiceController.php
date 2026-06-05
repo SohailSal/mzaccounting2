@@ -223,4 +223,38 @@ class InvoiceController extends Controller
         $pdf->loadView('invoices/unpaid');
         return $pdf->stream('unpaid.pdf');
     }
+
+    public function getInvoicesRange(Request $request)
+    {
+        $start = $request->get('date_start');
+        $end = $request->get('date_end');
+
+        // $invoices = Invoice::where('paid','=',0)
+        // ->whereBetween('date_of_invoice', [$start, $end])
+        // ->whereDate('date_of_invoice','>=',$start)
+        // ->whereDate('date_of_invoice','<=',$end)
+        // ->get();
+        // dd($invoices);
+
+
+        $invoices = Invoice::where('paid','=',0)->get()
+                ->map(function ($entry){
+                    return [
+                        'id' => $entry->id,
+                        'ref' => $entry->ref,
+                        'date_of_invoice' => Carbon::parse($entry->date_of_invoice)->toDateString(),
+                        'account' => $entry->account->head_of_account,
+                        'paid' => $entry->paid,
+                    ];
+                })->where('date_of_invoice','>=',$start)
+                  ->where('date_of_invoice','<=',$end)
+                  ->sortBy('date_of_invoice');   
+// dd($invoices);
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('invoices/range', compact('invoices'));
+        return $pdf->stream('range.pdf');
+    }
+
 }

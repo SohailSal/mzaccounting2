@@ -72,6 +72,28 @@
 </form>
 
 <br>
+<h2>Date-wise Invoices</h2>
+
+
+<form method="get" action="{{ action('InvoiceController@getInvoicesRange') }}">
+ @csrf
+  <div class="row">
+          <div class="form-group float-left">
+              <label for="date_start">Start date:</label>
+              <input type="text" class="form-control date" name="date_start"/>
+          </div>
+          <div class="form-group float-left">
+              <label for="date_end">End date:</label>
+              <input type="text" class="form-control date" name="date_end"/>
+          </div>
+          <div class="form-group float-left">
+              <label for="submit">&nbsp;</label>
+              <button type="submit" class="form-control btn btn-primary" name="submit">Get Invoices</button>
+          </div>
+  </div>
+</form>
+
+<br>
 <h2>Date-wise Receipts</h2>
 
 

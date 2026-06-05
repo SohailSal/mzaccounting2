@@ -80,6 +80,8 @@ Route::get('/postPV/{id}', 'PaymentController@postPV')->middleware(['auth','admi
 
 Route::get('/getReceiptsRange', 'ReceiptController@getReceiptsRange')->middleware(['auth','admin']);
 
+Route::get('/getInvoicesRange', 'InvoiceController@getInvoicesRange')->middleware(['auth','admin']);
+
 Route::get('/getPaymentsRange', 'PaymentController@getPaymentsRange')->middleware(['auth','admin']);
 
 Route::get('/eraser', function () {

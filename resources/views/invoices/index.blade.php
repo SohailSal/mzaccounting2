@@ -17,7 +17,7 @@
     <div>
     <a style="margin: 5px;" href="{{ route('home')}}" class="btn btn-primary">Home</a>
     <a style="margin: 5px;" href="{{ route('invoices.create')}}" class="btn btn-primary">New Invoice</a>
-    <a style="margin: 5px;" href="{{action('InvoiceController@unpaid')}}" class="btn btn-primary">Unpaid Invoices</a>
+    <!-- <a style="margin: 5px;" href="{{action('InvoiceController@unpaid')}}" class="btn btn-primary">Unpaid Invoices</a> -->
     <form method="get" action="{{ route('invoices.index') }}">
       @csrf
       <div class="float-right btn-group">
