@@ -64,7 +64,7 @@
                             Reports
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{action('InvoiceController@unpaid')}}">Unpaid invoices</a>
+                            <!-- <a class="dropdown-item" href="{{action('InvoiceController@unpaid')}}">Unpaid invoices</a> -->
                             <a class="dropdown-item" href="{{action('EntryController@clientBal')}}">Debtors balances</a>
                             <!-- <a class="dropdown-item" href="{{action('ReceiptController@getReceipts',  ['id'=>'25', 'actual'=> '26'])}}">Receipts detail</a> -->
                             <!-- <a class="dropdown-item" href="{{action('PaymentController@getPayments',  ['id'=>'25', 'actual'=> '26'])}}">Payments detail</a> -->

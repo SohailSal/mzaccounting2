@@ -44,8 +44,7 @@
             <td align="center">
             </td>
             <td align="right" style="width: 40%;">
-                <h5>Generated on: {{ $dt}}</h5>
-                <h4></h4>
+                <h5>{{$period}}<br>Generated on: {{ $dt}}</h5>
             </td>
         </tr>
     </table>

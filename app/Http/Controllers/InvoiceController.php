@@ -248,9 +248,10 @@ class InvoiceController extends Controller
                 ->where('date_of_invoice','<=',$end)
                 ->sortBy('date_of_invoice');
 
+        $period = "From ".strval($start)." to ".strval($end);
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('invoices/range', compact('invoices', 'unpaidOnly'));
+        $pdf->loadView('invoices/range', compact('invoices', 'unpaidOnly','period'));
         return $pdf->stream('range.pdf');
     }
 
