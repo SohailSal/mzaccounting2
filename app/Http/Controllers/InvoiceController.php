@@ -228,17 +228,15 @@ class InvoiceController extends Controller
     {
         $start = $request->get('date_start');
         $end = $request->get('date_end');
+        $unpaidOnly = $request->boolean('unpaid_only', true);
 
-        // $invoices = Invoice::where('paid','=',0)
-        // ->whereBetween('date_of_invoice', [$start, $end])
-        // ->whereDate('date_of_invoice','>=',$start)
-        // ->whereDate('date_of_invoice','<=',$end)
-        // ->get();
-        // dd($invoices);
+        $query = Invoice::query();
+        if ($unpaidOnly) {
+            $query->where('paid', 0);
+        }
 
-
-        $invoices = Invoice::where('paid','=',0)->get()
-                ->map(function ($entry){
+        $invoices = $query->get()
+                ->map(function ($entry) {
                     return [
                         'id' => $entry->id,
                         'ref' => $entry->ref,
@@ -247,13 +245,12 @@ class InvoiceController extends Controller
                         'paid' => $entry->paid,
                     ];
                 })->where('date_of_invoice','>=',$start)
-                  ->where('date_of_invoice','<=',$end)
-                  ->sortBy('date_of_invoice');   
-// dd($invoices);
+                ->where('date_of_invoice','<=',$end)
+                ->sortBy('date_of_invoice');
 
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('invoices/range', compact('invoices'));
+        $pdf->loadView('invoices/range', compact('invoices', 'unpaidOnly'));
         return $pdf->stream('range.pdf');
     }
 

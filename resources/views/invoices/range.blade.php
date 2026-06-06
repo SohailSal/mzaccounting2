@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Unpaid Invoices</title>
+    <title>{{ !empty($unpaidOnly) ? 'Unpaid ' : '' }}Invoices</title>
 
     <style type="text/css">
         @page {margin: 20px;}
@@ -38,7 +38,7 @@
     <table width="100%">
         <tr>
             <td align="left" style="width: 40%;">
-    <h3>Unpaid Invoices</h3>
+    <h3>{{ !empty($unpaidOnly) ? 'Unpaid ' : '' }}Invoices</h3>
 
             </td>
             <td align="center">

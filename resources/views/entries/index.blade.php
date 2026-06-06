@@ -42,7 +42,7 @@
 </form>
 
 <br>
-<h2>Date-wise Ledger</h2>
+<h2>Ledger</h2>
 
 
 <form method="get" action="{{ action('EntryController@getLed') }}">
@@ -72,7 +72,7 @@
 </form>
 
 <br>
-<h2>Date-wise Invoices</h2>
+<h2>Invoices</h2>
 
 
 <form method="get" action="{{ action('InvoiceController@getInvoicesRange') }}">
@@ -86,6 +86,13 @@
               <label for="date_end">End date:</label>
               <input type="text" class="form-control date" name="date_end"/>
           </div>
+          <div class="form-group float-left" style="margin-top: 32px; margin-left: 15px;">
+              <input type="hidden" name="unpaid_only" value="0">
+              <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="unpaid_only" name="unpaid_only" value="1" checked>
+                  <label class="form-check-label" for="unpaid_only">Unpaid only</label>
+              </div>
+          </div>
           <div class="form-group float-left">
               <label for="submit">&nbsp;</label>
               <button type="submit" class="form-control btn btn-primary" name="submit">Get Invoices</button>
@@ -94,7 +101,7 @@
 </form>
 
 <br>
-<h2>Date-wise Receipts</h2>
+<h2>Receipts</h2>
 
 
 <form method="get" action="{{ action('ReceiptController@getReceiptsRange') }}">
@@ -116,7 +123,7 @@
 </form>
 
 <br>
-<h2>Date-wise Payments</h2>
+<h2>Payments</h2>
 
 
 <form method="get" action="{{ action('PaymentController@getPaymentsRange') }}">
