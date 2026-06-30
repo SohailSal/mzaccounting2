@@ -21,10 +21,11 @@
 </head>
 <body>
     <?php
-            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            // $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::DECIMAL );
             $amt = new NumberFormatter( 'en_GB', NumberFormatter::SPELLOUT );
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-            $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
+            // $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
 
                 $accounts = App\Account::all();
                 $obalance = [];
@@ -84,7 +85,8 @@
                 {{$account->head_of_account}}
             </td>
             <td style="width: 10%; border-left: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($obalance[$loop->index],'Rs.'))}}
+                {{ $fmt->format($obalance[$loop->index]) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($obalance[$loop->index],'Rs.'))}} --}}
             </td>
         </tr>
         <?php $debit = $debit + $obalance[$loop->index]; ?>
@@ -94,7 +96,8 @@
                 <strong>Total</strong>
                 </td>
                 <td style="width: 10%; border-left: 1pt solid black; border-top: 1pt solid black; border-bottom: 3pt double black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($debit,'Rs.'))}}
+                {{ $fmt->format($debit) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($debit,'Rs.'))}} --}}
                 </td>
         </tr>
             </tbody>

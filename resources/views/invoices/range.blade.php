@@ -21,10 +21,11 @@
 </head>
 <body>
     <?php
-            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            // $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::DECIMAL );
             $amt = new NumberFormatter( 'en_GB', NumberFormatter::SPELLOUT );
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-            $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
+            // $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
 
   //      $invoices = App\Invoice::where('paid','=','0')->get();
 //$invoices = DB::table('invoices')->where('paid','=','0')->get();
@@ -111,7 +112,8 @@
 
             @if(App\InvoiceEntry::where([['invoice_id',$item['id']],['description','Total']])->first())
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($inv->amount,'Rs.'))}}
+                {{ $fmt->format($inv->amount) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($inv->amount,'Rs.'))}} --}}
             </td>
             @endif
         </tr>
@@ -121,7 +123,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td style="width: 10%; border-top: 1pt solid black; border-bottom: 3pt double black;" align="right"><strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($total,'Rs.'))}}</strong></td>
+            <td style="width: 10%; border-top: 1pt solid black; border-bottom: 3pt double black;" align="right"><strong>{{ $fmt->format($total) }}</strong></td>
+            {{-- <td style="width: 10%; border-top: 1pt solid black; border-bottom: 3pt double black;" align="right"><strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($total,'Rs.'))}}</strong></td> --}}
         </tr>
             </tbody>
 

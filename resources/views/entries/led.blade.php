@@ -21,10 +21,11 @@
 </head>
 <body>
     <?php
-            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            // $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::DECIMAL );
             $amt = new NumberFormatter( 'en_GB', NumberFormatter::SPELLOUT );
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-            $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
+            // $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
 
             $prebal = 0;
             $lastbalance = 0;
@@ -113,7 +114,8 @@
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
             </td>
             <td style="width: 10%" align="right">
-            <strong> {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($prebal,'Rs.'))}} </strong>
+            <strong> {{ $fmt->format($prebal) }} </strong>
+            {{-- <strong> {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($prebal,'Rs.'))}} </strong> --}}
             </td>
         </tr>
 
@@ -135,15 +137,18 @@
 
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['debit'],'Rs.'))}}
+                {{ $fmt->format($entry['debit']) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['debit'],'Rs.'))}} --}}
 
             </td>
             <td style="width: 10%; border-right: 1pt solid black;" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['credit'],'Rs.'))}}
+                {{ $fmt->format($entry['credit']) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry['credit'],'Rs.'))}} --}}
 
             </td>
             <td style="width: 10%" align="right">
-                {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($balance[$loop->index],'Rs.'))}}
+                {{ $fmt->format($balance[$loop->index]) }}
+                {{-- {{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($balance[$loop->index],'Rs.'))}} --}}
 
             </td>
         </tr>
@@ -163,11 +168,13 @@
             <td style="width: 40%; border-right: 1pt solid black;border-top:1pt solid black;">
             </td>
             <td style="width: 10%; border-right: 1pt solid black;border-top:1pt solid black;border-bottom:3pt double black;" align="right">
-                <strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($debits,'Rs.'))}}</strong>
+                <strong>{{ $fmt->format($debits) }}</strong>
+                {{-- <strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($debits,'Rs.'))}}</strong> --}}
 
             </td>
             <td style="width: 10%; border-right: 1pt solid black;border-top:1pt solid black;border-bottom:3pt double black;" align="right">
-                <strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($credits,'Rs.'))}}</strong>
+                <strong>{{ $fmt->format($credits) }}</strong>
+                {{-- <strong>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($credits,'Rs.'))}}</strong> --}}
 
             </td>
             <td style="width: 10%; border-top:1pt solid black;" align="right">

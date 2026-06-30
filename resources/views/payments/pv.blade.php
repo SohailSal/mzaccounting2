@@ -18,10 +18,11 @@
 </head>
 <body>
     <?php
-            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            // $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::DECIMAL );
             $amt = new NumberFormatter( 'en_GB', NumberFormatter::SPELLOUT );
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-            $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
+            // $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
     ?>
 
 <div class="information">
@@ -45,7 +46,8 @@
         <tbody>
         <tr>
             <td style="width: 23%">Amount:</td>
-            <td style="width: 77%"><strong>Rs. {{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.')) }}</strong></td>
+            <td style="width: 77%"><strong>{{ $fmt->format($payment->amount) }}</strong></td>
+            {{-- <td style="width: 77%"><strong>Rs. {{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.')) }}</strong></td> --}}
         </tr>
         <tr>
             <td>In words:</td>

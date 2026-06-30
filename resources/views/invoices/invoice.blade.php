@@ -20,10 +20,11 @@
 </head>
 <body>
     <?php
-            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            // $fmt = new NumberFormatter( 'en_GB', NumberFormatter::CURRENCY );
+            $fmt = new NumberFormatter( 'en_GB', NumberFormatter::DECIMAL );
             $amt = new NumberFormatter( 'en_GB', NumberFormatter::SPELLOUT );
             $fmt->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-            $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
+            // $fmt->setSymbol(NumberFormatter::CURRENCY_SYMBOL, '');
     ?>
 <br>
 <br>
@@ -92,9 +93,11 @@
             <td style=" border-right: 2px solid;">{{$entry->description}}</td>
             @endif
             @if($loop->last)
-            <td style=" margin:10px;padding:10px;border-top: 2px solid ; border-bottom: 5px double;" align="right"><strong>{{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->amount,'Rs.')) }}</strong></td>
+            <td style=" margin:10px;padding:10px;border-top: 2px solid ; border-bottom: 5px double;" align="right"><strong>{{ $fmt->format($entry->amount) }}</strong></td>
+            {{-- <td style=" margin:10px;padding:10px;border-top: 2px solid ; border-bottom: 5px double;" align="right"><strong>{{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->amount,'Rs.')) }}</strong></td> --}}
             @else
-            <td style="margin:10px;padding:10px;" align="right">{{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->amount,'Rs.')) }}</td>
+            <td style="margin:10px;padding:10px;" align="right">{{ $fmt->format($entry->amount) }}</td>
+            {{-- <td style="margin:10px;padding:10px;" align="right">{{ str_replace(['Rs.','.00'],'',$fmt->formatCurrency($entry->amount,'Rs.')) }}</td> --}}
             @endif
         </tr>
     @endforeach
