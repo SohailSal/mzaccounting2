@@ -39,7 +39,8 @@
             <td>{{$payment->date_of_payment}}</td>
             <td>{{$payment->account->head_of_account}}</td>
             <td>{{$payment->payee}}</td>
-            <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.'))}}</td>
+            {{-- <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($payment->amount,'Rs.'))}}</td> --}}
+            <td align='right'>{{ number_format($payment->amount, 2) }}</td>
             <td>
                 <a href="{{ route('payments.edit',$payment->id)}}" class="btn btn-primary">Edit</a>
             </td>

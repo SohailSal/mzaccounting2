@@ -47,9 +47,12 @@
             <td>{{$receipt->ref}}</td>
             <td>{{$receipt->date_of_receipt}}</td>
             <td>{{$receipt->account->head_of_account}}</td>
-            <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->amount,'Rs.'))}}</td>
-            <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->itax,'Rs.'))}}</td>
-            <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->stax,'Rs.'))}}</td>
+            {{-- <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->amount,'Rs.'))}}</td> --}}
+            <td align='right'>{{ number_format($receipt->amount, 2) }}</td>
+            {{-- <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->itax,'Rs.'))}}</td> --}}
+            <td align='right'>{{ number_format($receipt->itax, 2) }}</td>
+            {{-- <td align='right'>{{str_replace(['Rs.','.00'],'',$fmt->formatCurrency($receipt->stax,'Rs.'))}}</td> --}}
+            <td align='right'>{{ number_format($receipt->stax, 2) }}</td>
             <td>
                 <a href="{{ route('receipts.edit',$receipt->id)}}" class="btn btn-primary">Edit</a>
             </td>

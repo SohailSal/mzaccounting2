@@ -48,7 +48,8 @@
 
               @foreach($invoice->invoiceentries as $entry)
                 @if($loop->last)
-                <td align="right">{{ $fmt->formatCurrency($entry->amount,'Rs.') }}</td>
+                {{-- <td align="right">{{ $fmt->formatCurrency($entry->amount,'Rs.') }}</td> --}}
+                <td align="right">{{ number_format($entry->amount, 2) }}</td>
                 @endif
               @endforeach
 
